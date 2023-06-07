@@ -1,0 +1,94 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-color: black;
+}
+
+#background {
+    width: 1000px;
+    height: 600px;
+    background-image: url('../img/background-final-2.jpg');
+    /* background-repeat:  no-repeat; */
+    /* background-size: contain; */
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+
+}
+
+.background {
+    width: 1000px;
+    height: 600px;
+    position: absolute;
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+    
+}
+
+.box {
+    position: absolute;
+    width: 101px;
+    height: 185px;
+    /* background-color: blue; */
+    /* background-image: url('../img/Idle\ \(1\).png'); */
+    /* background-image: url('../img/Idle__000.png'); */
+    /* background-size: contain; */
+    background-size: cover;
+    background-repeat: no-repeat;
+    bottom: 70px;
+    z-index: 999;
+    /* bottom: 70px; */
+}
+
+.object{
+    position: absolute;
+    /* background-color: blue; */
+    width: 108px;
+    height: 130px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    bottom: 70px;
+    background-image: url('/img/Walk\ \(1\).png');
+    transform: rotateY(180deg);
+}
+
+.obj {
+    width: fit-content;
+    height: 150px;
+    background-size:cover;
+    background-repeat: no-repeat;
+    bottom: 80px;    
+    background-image: url('/img/Objects-1/Bush\ \(1\).png');
+}
+
+.fireBall {
+   
+    background-size: cover;
+    background-size: contain;
+    /* background-repeat: no-repeat; */
+    background-image: url('/img/fireball.gif');
+    transform: rotateY(180deg);
+    border-radius: 50%;
+}
+
+.egg {
+    /* background-size: cover; */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url('/img/egg.png');
+}
+
+.fylDragon {
+    background-size: cover;
+    background-image: url('/img/dragon-2.gif');
+    transform: rotateY(180deg) ;
+    border-radius: 50%;
+}
