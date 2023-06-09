@@ -12,8 +12,8 @@ body {
 }
 
 #background {
-    width: 1000px;
-    height: 600px;
+    width: 90vw ;
+    height: 90vh;
     background-image: url('../img/background-final-2.jpg');
     /* background-repeat:  no-repeat; */
     /* background-size: contain; */
@@ -24,8 +24,8 @@ body {
 }
 
 .background {
-    width: 1000px;
-    height: 600px;
+    width: 100vw ;
+    height: 100vh;
     position: absolute;
     background-size: cover;
     position: relative;
@@ -91,4 +91,20 @@ body {
     background-image: url('/img/dragon-2.gif');
     transform: rotateY(180deg) ;
     border-radius: 50%;
+}
+
+
+#pgb-container {
+    width: 80vw;
+    height: 20px;
+    background-color: lightgrey;
+    margin: 10px 0;
+    border-radius: 10px;
+}
+
+#pgb {
+    width: 0%;
+    height: 100%;
+    background-color: dodgerblue;
+    overflow: hidden;
 }

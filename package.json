@@ -1,0 +1,13 @@
+{
+  "name": "11-mini-game",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "animate.css": "^4.1.1",
+    "bootstrap": "^5.3.0",
+    "jquery": "^3.7.0"
+  }
+}

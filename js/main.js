@@ -1,25 +1,121 @@
+
+const pgb = $("#pgb");
+
+
+if (typeof window.innerWidth == 'undefined' || typeof window.innerWidth == 'null') {
+    viewPortWidth=1300;
+}else{
+    viewPortWidth = window.innerWidth,
+    viewPortHeight = window.innerHeight
+}
+
+let picArray = [];
+let imgArray = [];
+let url;
+
+let imgCount=0;
+let percentage=0;
+
+let load=0;
+let prg=0;
+
+/* Calculate image loading*/
+
+for(let i = 0; i <= 9; i++){
+    const image = new Image();
+    image.src  = `img/Jump__00${i}.png`;
+    image.onload = function(){
+        ++load;
+        percentage=(load/70)*100+"%";
+        console.log(percentage);
+        // pgb.css('width', percentage);
+        
+    }
+}
+
+
 for(let i = 0; i <= 9; i++){
     const image = new Image();
     // image.src  = `img/Jump (${i}).png`;
     image.src  = `img/Jump__00${i}.png`;
+    url=`img/Jump__00${i}.png`;
+    image.onload = function(){
+        ++load;
+        percentage=(load/70)*100+"%";
+        console.log(percentage);
+        // pgb.css('width', percentage);
+
+    }
 }
+
+
 for(let i = 0; i <= 9; i++){
     const image = new Image();
     // image.src  = `img/Idle (${i}).png`;
     image.src  = `img/Idle__00${i}.png`;
+    image.onload = function(){
+        ++load;
+        percentage=(load/70)*100+"%";
+        console.log(percentage);
+        // pgb.css('width', percentage);
+
+    }
 }
+
+
 for(let i = 0; i <= 9; i++){
     const image = new Image();
     image.src  = `img/Run__00${i}.png`;
+    image.onload = function(){
+        ++load;
+        percentage=(load/70)*100+"%";
+        console.log(percentage);
+        // pgb.css('width', percentage);
+
+    }
 }
+
+
 for(let i = 0; i <= 9; i++){
     const image = new Image();
     image.src  = `img/Dead__00${i}.png`;
+    image.onload = function(){
+        ++load;
+        percentage=(load/70)*100+"%";
+        console.log(percentage);
+        // pgb.css('width', percentage);
+
+    }
+}
+
+
+for(let i = 0; i <= 9; i++){
+    const image = new Image();
+    image.src  = `img/Jump_Attack__00${i}.png`;
+    image.onload = function(){
+        ++load;
+        percentage=(load/70)*100+"%";
+        console.log(percentage);
+        // pgb.css('width', percentage);
+    }
+}
+
+
+for(let i = 1; i <= 10; i++){
+    const image = new Image();
+    image.src  = `img/Walk (${i}).png`;
+    image.onload = function(){
+        ++load;
+        percentage=(load/70)*100+"%";
+        console.log(percentage);
+        // pgb.css('width', percentage);
+    }
 }
 
 
 let loss=0;
 let win=0;
+
 
 const bgElm = document.getElementById('background');
 
@@ -98,8 +194,8 @@ function doRun(){
     let x = boxElm.offsetLeft + dx;
     
     let bgCSS = getComputedStyle(bgElm);
-    if ((x + boxElm.offsetWidth)> innerWidth-350) {
-        x = innerWidth - boxElm.offsetWidth-350;
+    if ((x + boxElm.offsetWidth)> innerWidth-130) {
+        x = innerWidth - boxElm.offsetWidth-130;
         if(bgRight){
             bgX -= 2;
         }
@@ -209,7 +305,7 @@ class DivObject{
     width = 110;
     height = 110;
     speed;
-    xPos=1100;
+    xPos=viewPortWidth+100;
     yPos=70;
     r2;
     elm;
@@ -233,7 +329,7 @@ class DivObject{
         if(alive && this.xPos > -100 && !this.dead){
             this.elm.style.left = `${this.xPos}px`;
         }else{
-            this.xPos=1100;
+            this.xPos=viewPortWidth+100;
         }
         
         const r1 = (Math.hypot(boxElm.offsetHeight,boxElm.offsetWidth)-55)/2;
@@ -251,8 +347,8 @@ class DivObject{
                 ++d;
                 setTimeout(()=>{
                     this.speed = (5+Math.random()*12);
-                    this.elm.style.left=1100+'px'
-                    this.xPos=1100;
+                    this.elm.style.left=viewPortWidth+100+'px'
+                    this.xPos=viewPortWidth+100;
                     if(dragon.yPos === 214){
                         dragon.yPos=75
                     }else{
@@ -261,8 +357,9 @@ class DivObject{
                 },1000);
                 fireBallBottom.kill();
             }else if(!this.dead){
+                fireBallBottom.xPos=viewPortWidth+100;
                 this.speed = (4+Math.random()*10);
-                this.elm.style.left=1100+'px';
+                this.elm.style.left=viewPortWidth+100+'px';
                 alive=false;
                 loss+=1;
             }
@@ -323,7 +420,7 @@ class DragonObject{
     width = 200;
     height = 200;
     speed;
-    xPos=1100;
+    xPos=viewPortWidth+100;
     yPos;
     r2;
     elm;
@@ -354,7 +451,7 @@ class DragonObject{
             this.elm.style.left = `${this.xPos}px`;
             
         }else{
-            this.xPos=1100;
+            this.xPos=viewPortWidth+100;
         }
         
         const r1 = (Math.hypot(boxElm.offsetHeight,boxElm.offsetWidth)-55)/2;
@@ -374,7 +471,7 @@ class DragonObject{
                 this.elm.style.transform='scale(0)';    //?
                 setTimeout(()=>{
                     this.speed = (4+Math.random()*10);
-                    this.xPos=1100;
+                    this.xPos=viewPortWidth+100;
                     this.elm.style.left=this.xPos+'px'
                     this.elm.style.transform='scale(1)'
                     this.elm.style.transform= 'rotateY(180deg)';
@@ -385,16 +482,16 @@ class DragonObject{
                     }
                 },1000);
                 setTimeout(()=>this.dead=false,1500);
-
+                
             }else if(!this.dead){
                 console.log()
                 this.speed = (4+Math.random()*10);
-                this.elm.style.left=1100+'px';
+                this.elm.style.left=viewPortWidth+100+'px';
                 alive=false;
                 loss+=1;
                 this.yPos = (Math.random()< 0.5 ? 214 : 75 );
-                dragon.xPos=1100;
-                fireBallBottom.xPos=1100;
+                dragon.xPos=viewPortWidth+100;
+                fireBallBottom.xPos=viewPortWidth+100;
 
             }
         }
@@ -415,7 +512,7 @@ class FireBallObject{
     width = 90;
     height = 60;
     speed;
-    xPos=1100;
+    xPos=viewPortWidth+100;
     yPos;
     r2;
     elm;
@@ -446,7 +543,7 @@ class FireBallObject{
         // }
         if(divObject.dead){
             // this.xPos=divObject.xPos;
-            this.xPos=1100;
+            this.xPos=viewPortWidth+100;
         }
 
         if(this.xPos>-100){
@@ -476,12 +573,12 @@ class FireBallObject{
         if (hypot < (r1 + this.r2)-40){ 
             alive=false;
             loss+=1;
-            // this.xPos=1100;
-            // fireBallBottom.xPos=1100;
-            this.xPos=1100;
+            // this.xPos=viewPortWidth+100;
+            // fireBallBottom.xPos=viewPortWidth+100;
+            this.xPos=viewPortWidth+100;
             this.elm.style.left=this.xPos+'px';
             setTimeout(()=>this.speed = 4+Math.random()*12,0)
-            
+            dragon.xPos=viewPortWidth+100;
             // this.elm.style.left=this.xPos+'px';
             // this.yPos = (70);
             // console.log('Player dead"s: ', ++playerDeadCount);
@@ -496,7 +593,7 @@ setInterval(()=>{
     if(fireBallBottom!=null && alive){
         fireBallBottom.kill();
     }else{
-        // fireBallBottom.xPos=1100;
+        // fireBallBottom.xPos=viewPortWidth+100;
     }
 },50);
 
@@ -537,7 +634,7 @@ class FloatingObject{
     kill(){
         this.yPos += this.speed;
         this.elm.style.left = this.xPos+'px';
-        if(this.yPos >= innerHeight-300 ){
+        if(this.yPos >= innerHeight-200){
             this.speed=0;
             this.floating=false;
             // console.log("Working")
@@ -557,7 +654,7 @@ class FloatingObject{
         
         if (hypot < (r1 + this.r2)-40){ 
             alive=false;
-            // this.xPos=1100;
+            // this.xPos=viewPortWidth+100;
             // this.elm.style.left=this.xPos+'px';
             // this.yPos = (75+Math.random()*275);
             ++loss;
@@ -601,29 +698,52 @@ setInterval(()=>{
 
 /* Dead count setup */
 
+let lblPosition=100;
+
 const lblWin = document.createElement('label');
 lblWin.style.position='absolute';
+lblWin.classList.add('animate__animated');
 lblWin.style.fontSize='2rem';
 lblWin.style.fontWeight='bold';
 lblWin.style.backgroundColor="green";
 lblWin.style.borderRadius='6px';
 lblWin.style.padding='10px';
 lblWin.style.top='10px';
-lblWin.style.left='10px'
+lblWin.style.left=lblPosition+'px'
 bgElm.append(lblWin);
 
 const lblLoss = document.createElement('label');
 lblLoss.style.position='absolute';
+lblLoss.classList.add('animate__animated');
 lblLoss.style.fontSize='2rem';
 lblLoss.style.fontWeight='bold';
 lblLoss.style.backgroundColor="darkRed";
 lblLoss.style.borderRadius='6px';
 lblLoss.style.padding='10px';
 lblLoss.style.top='10px';
-lblLoss.style.left='855px';
+lblLoss.style.right=lblPosition+'px';
 bgElm.append(lblLoss);
 
+let winOldTxt=lblWin.innerText;
+let lossOldTxt=lblLoss.innerText;
 setInterval(()=>{
-    lblWin.innerText=`Win = ${win}`
-    lblLoss.innerText=`Loss = ${loss}`
+    const winCurrentTxt=lblWin.innerText;
+    lblWin.innerText=`Win = ${win}`;
+    if(winOldTxt!=winCurrentTxt){
+        setTimeout(()=>lblWin.classList.add('animate__shakeX'),0) ;
+        setTimeout(()=>lblWin.classList.remove('animate__shakeX'),500) ;
+        
+    }
+    winOldTxt=winCurrentTxt;
+    
+    
+    const lossCurrentText=lblLoss.innerText; 
+    lblLoss.innerText=`Loss = ${loss}`;
+    if(lossOldTxt!=lossCurrentText){
+        setTimeout(()=>lblLoss.classList.add('animate__shakeX'),0) ;
+        setTimeout(()=>lblLoss.classList.remove('animate__shakeX'),500) ;
+        
+    }
+    lossOldTxt=lossCurrentText;
+
 },50);
