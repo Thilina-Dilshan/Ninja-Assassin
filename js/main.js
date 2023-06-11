@@ -9,7 +9,6 @@ if (typeof window.innerWidth == 'undefined' || typeof window.innerWidth == 'null
     viewPortHeight = window.innerHeight
 }
 
-let picArray = [];
 let imgArray = [];
 let url;
 
@@ -27,7 +26,7 @@ for(let i = 0; i <= 9; i++){
     image.onload = function(){
         ++load;
         percentage=(load/70)*100+"%";
-        console.log(percentage);
+        // console.log(percentage);
         // pgb.css('width', percentage);
         
     }
@@ -42,7 +41,7 @@ for(let i = 0; i <= 9; i++){
     image.onload = function(){
         ++load;
         percentage=(load/70)*100+"%";
-        console.log(percentage);
+        // console.log(percentage);
         // pgb.css('width', percentage);
 
     }
@@ -56,7 +55,7 @@ for(let i = 0; i <= 9; i++){
     image.onload = function(){
         ++load;
         percentage=(load/70)*100+"%";
-        console.log(percentage);
+        // console.log(percentage);
         // pgb.css('width', percentage);
 
     }
@@ -69,7 +68,7 @@ for(let i = 0; i <= 9; i++){
     image.onload = function(){
         ++load;
         percentage=(load/70)*100+"%";
-        console.log(percentage);
+        // console.log(percentage);
         // pgb.css('width', percentage);
 
     }
@@ -82,7 +81,7 @@ for(let i = 0; i <= 9; i++){
     image.onload = function(){
         ++load;
         percentage=(load/70)*100+"%";
-        console.log(percentage);
+        // console.log(percentage);
         // pgb.css('width', percentage);
 
     }
@@ -95,7 +94,7 @@ for(let i = 0; i <= 9; i++){
     image.onload = function(){
         ++load;
         percentage=(load/70)*100+"%";
-        console.log(percentage);
+        // console.log(percentage);
         // pgb.css('width', percentage);
     }
 }
@@ -107,7 +106,7 @@ for(let i = 1; i <= 10; i++){
     image.onload = function(){
         ++load;
         percentage=(load/70)*100+"%";
-        console.log(percentage);
+        // console.log(percentage);
         // pgb.css('width', percentage);
     }
 }
@@ -160,7 +159,7 @@ document.body.addEventListener('keydown', (eventData)=> {
             attack = true;
         }
     }else{
-        console.log(eventData.code)
+        // console.log(eventData.code);
     }
 });
 
@@ -460,11 +459,11 @@ class DragonObject{
         const hypot = Math.hypot(xDiff, yDiff);
         
         if (hypot < (r1 + this.r2)-60){ 
-            console.log(hypot < (r1 + this.r2)-45);
+            // console.log(hypot < (r1 + this.r2)-45);
         
             if(attack){
                 win+=1;
-                console.log(this.speed)
+                // console.log(this.speed);
                 this.dead = true;
                 this.elm.style.transitionProperty='transform';
                 this.elm.style.transitionDuration='1000ms'; //?
@@ -484,7 +483,6 @@ class DragonObject{
                 setTimeout(()=>this.dead=false,1500);
                 
             }else if(!this.dead){
-                console.log()
                 this.speed = (4+Math.random()*10);
                 this.elm.style.left=viewPortWidth+100+'px';
                 alive=false;
@@ -506,6 +504,7 @@ setInterval(()=>{
     }
 },50);
 
+
 /* Fire ball object */
 
 class FireBallObject{
@@ -517,8 +516,10 @@ class FireBallObject{
     r2;
     elm;
     dead=false;
+    speeding;
     constructor(speed,yPos){
         this.speed = speed;
+        this.speeding = true;
         this.yPos = yPos;
         this.elm = document.createElement('div');
         this.elm.style.position = 'absolute';
@@ -541,17 +542,19 @@ class FireBallObject{
         //     this.xPos=divObject.xPos;
             
         // }
+        this.elm.style.bottom = this.yPos+'px';
+        
         if(divObject.dead){
             // this.xPos=divObject.xPos;
             this.xPos=viewPortWidth+100;
         }
 
-        if(this.xPos>-100){
-            this.xPos -= divObject.speed*1.3;
+        if(this.xPos>-100 && this.xPos<1110){
+            this.xPos -= divObject.speed*1.5;
+        }else{
+            this.xPos -= divObject.speed;
         }
 
-
-        this.elm.style.bottom = this.yPos+'px';
         if(this.xPos > -100){
             this.elm.style.left = `${this.xPos}px`;
             
@@ -562,7 +565,6 @@ class FireBallObject{
             // this.elm.style.right = 10;
             this.xPos=divObject.xPos;
             this.speed=0;
-            
         }
         
         const r1 = (Math.hypot(boxElm.offsetHeight,boxElm.offsetWidth)-55)/2;
@@ -590,12 +592,13 @@ class FireBallObject{
 
 let fireBallBottom = new FireBallObject((4+Math.random()*12),110);
 setInterval(()=>{ 
-    if(fireBallBottom!=null && alive){
+    if(fireBallBottom!=null && alive ){
         fireBallBottom.kill();
     }else{
         // fireBallBottom.xPos=viewPortWidth+100;
     }
 },50);
+
 
 
 
@@ -735,7 +738,6 @@ setInterval(()=>{
         
     }
     winOldTxt=winCurrentTxt;
-    
     
     const lossCurrentText=lblLoss.innerText; 
     lblLoss.innerText=`Loss = ${loss}`;
