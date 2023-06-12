@@ -359,8 +359,8 @@ class DivObject{
                 fireBallBottom.xPos=viewPortWidth+100;
                 this.speed = (4+Math.random()*10);
                 this.elm.style.left=viewPortWidth+100+'px';
+                if(alive)loss+=1;
                 alive=false;
-                loss+=1;
             }
         }
     } 
@@ -485,8 +485,8 @@ class DragonObject{
             }else if(!this.dead){
                 this.speed = (4+Math.random()*10);
                 this.elm.style.left=viewPortWidth+100+'px';
+                if(alive)loss+=1;
                 alive=false;
-                loss+=1;
                 this.yPos = (Math.random()< 0.5 ? 214 : 75 );
                 dragon.xPos=viewPortWidth+100;
                 fireBallBottom.xPos=viewPortWidth+100;
@@ -573,8 +573,8 @@ class FireBallObject{
         const hypot = Math.hypot(xDiff, yDiff);
         
         if (hypot < (r1 + this.r2)-40){ 
+            if(alive)loss+=1;
             alive=false;
-            loss+=1;
             // this.xPos=viewPortWidth+100;
             // fireBallBottom.xPos=viewPortWidth+100;
             this.xPos=viewPortWidth+100;
@@ -656,11 +656,11 @@ class FloatingObject{
         const hypot = Math.hypot(xDiff, yDiff);
         
         if (hypot < (r1 + this.r2)-40){ 
+            if(alive)++loss;
             alive=false;
             // this.xPos=viewPortWidth+100;
             // this.elm.style.left=this.xPos+'px';
             // this.yPos = (75+Math.random()*275);
-            ++loss;
             // console.log('Player dead"s: ', ++playerDeadCount);
 
         }
