@@ -1,5 +1,4 @@
-
-const pgb = $("#pgb");
+const pgb = $('#pgb');
 
 if (typeof window.innerWidth == 'undefined' || typeof window.innerWidth == 'null') {
     viewPortWidth=1300;
@@ -19,93 +18,57 @@ let prg=0;
 
 /* Calculate image loading*/
 
+let imgFiles = [];
+
 for(let i = 0; i <= 9; i++){
-    const image = new Image();
-    image.src  = `img/Jump__00${i}.png`;
-    image.onload = function(){
-        ++load;
-        percentage=(load/70)*100+"%";
-        pgb.css('width', percentage);
-        
-    }
+    imgFiles.push(`img/Jump__00${i}.png`);
 }
 
-
-for(let i = 0; i <= 9; i++){
-    const image = new Image();
-    // image.src  = `img/Jump (${i}).png`;
-    image.src  = `img/Jump__00${i}.png`;
-    url=`img/Jump__00${i}.png`;
-    image.onload = function(){
-        ++load;
-        percentage=(load/70)*100+"%";
-        pgb.css('width', percentage);
-
-    }
-}
-
-
-for(let i = 0; i <= 9; i++){
-    const image = new Image();
-    // image.src  = `img/Idle (${i}).png`;
-    image.src  = `img/Idle__00${i}.png`;
-    image.onload = function(){
-        ++load;
-        percentage=(load/70)*100+"%";
-        pgb.css('width', percentage);
-
-    }
-}
-
-
-for(let i = 0; i <= 9; i++){
-    const image = new Image();
-    image.src  = `img/Run__00${i}.png`;
-    image.onload = function(){
-        ++load;
-        percentage=(load/70)*100+"%";
-        pgb.css('width', percentage);
-
-    }
-}
-
-
-for(let i = 0; i <= 9; i++){
-    const image = new Image();
-    image.src  = `img/Dead__00${i}.png`;
-    image.onload = function(){
-        ++load;
-        percentage=(load/70)*100+"%";
-        pgb.css('width', percentage);
-
-    }
-}
-
-
-for(let i = 0; i <= 9; i++){
-    const image = new Image();
-    image.src  = `img/Jump_Attack__00${i}.png`;
-    image.onload = function(){
-        ++load;
-        percentage=(load/70)*100+"%";
-        pgb.css('width', percentage);
-    }
+for(let i = 1; i <= 12; i++){
+    imgFiles.push(`img/Jump (${i}).png`);
 }
 
 
 for(let i = 1; i <= 10; i++){
+    imgFiles.push(`img/Idle (${i}).png`);
+}
+
+for(let i = 0; i <= 9; i++){
+    imgFiles.push(`img/Idle__00${i}.png`);
+}
+
+
+for(let i = 0; i <= 9; i++){
+    imgFiles.push(`img/Run__00${i}.png`);
+}
+
+
+for(let i = 0; i <= 9; i++){
+    imgFiles.push(`img/Dead__00${i}.png`);
+}
+
+
+for(let i = 0; i <= 9; i++){
+    imgFiles.push(`img/Jump_Attack__00${i}.png`);
+}
+
+
+for(let i = 1; i <= 10; i++){
+    imgFiles.push(`img/Walk (${i}).png`);
+}
+
+console.log(imgFiles.length);
+for (let n = 0; n < imgFiles.length; n++) {
     const image = new Image();
-    image.src  = `img/Walk (${i}).png`;
+    image.src  = imgFiles[n];
     image.onload = function(){
         ++load;
-        percentage=(load/70)*100+"%";
+        percentage=(load/(imgFiles.length+audFiles.length))*100+"%";
         pgb.css('width', percentage);
     }
 }
 
-
 /*Instructions*/
-
 let btnStart = $("#startButton");
 let instElm = $("#instructionsModal");
 let gameStart = false;
@@ -114,6 +77,7 @@ let gameStart = false;
 btnStart.on('click', (evt) => {
     instElm.remove();
     gameStart=true;
+    startAudio?.play();
     dragon = new DragonObject(8,(Math.random()< 0.5 ? 214 : 75 ));
     fireBallBottom = new FireBallObject((4+Math.random()*12),110);
 });
@@ -125,9 +89,8 @@ btnStart.on('mousedown',(evt) => $(evt.currentTarget).css('opacity', '0.7'))
 btnStart.on('mouseup', (evt) => $(evt.currentTarget).css('opacity', '1'));
 
 
-
-let loss=3;
-let win=0;
+let loss = 5;
+let win = 0;
 
 const bgElm = document.getElementById('background');
 
@@ -168,14 +131,45 @@ setInterval(() => {
 
 }, 50);
 
+let audFiles = ["./audio/jump.mp3", "./audio/sword.wav", "./audio/enemy_killed.wav", "./audio/character_dead.mp3",
+    "./audio/running.mp3", "./audio/background.mp3", "./audio/start.mp3"];
 
+
+/* Adding sounds */
+let jumpAudio = new Audio('./audio/jump.mp3');
+let attackAudio = new Audio("./audio/sword.wav");
+let killedAudio = new Audio("./audio/enemy_killed.wav");
+let deadAudio = new Audio("./audio/character_dead.mp3");
+let runAudio = new Audio("./audio/running.mp3");
+let backgroundAudio = new Audio("./audio/background.mp3");
+let startAudio = new Audio("./audio/start.mp3");
+let audVariable = [jumpAudio, attackAudio, killedAudio, deadAudio, runAudio, backgroundAudio, startAudio];
+
+for (let n = 0; n < audVariable.length; n++) {
+    const audio = document.createElement('audio');
+    audio.style.display = "none";
+    audio.src = audFiles[n];
+    audio.load();
+    audio.onloadstart = function (){
+        load++;
+        percentage=(load/(imgFiles.length+audFiles.length))*100+"%";
+        pgb.css('width', percentage);
+    }
+}
+
+backgroundAudio.loop = true;
+backgroundAudio.play()
+
+setInterval(() => {
+    backgroundAudio.play();
+}, 11000);
 
 document.body.addEventListener('click', ()=> document.body.requestFullscreen());
 
 let jump = false;
 let run = false;
 let alive = true;
-attack=false;
+let attack=false;
 let dx = 0;
 
 
@@ -185,11 +179,13 @@ document.body.addEventListener('keydown', (eventData)=> {
     if (eventData.code === 'ArrowUp' || eventData.code === 'KeyW'){
         if(alive && gameStart && percentage === "100%"){
             jump = true;
+            jumpAudio?.play();
         }
     }else if (eventData.code === 'KeyD' || eventData.code === 'ArrowRight'){
         boxElm.style.transform = 'rotateY(0deg)'
         if(alive && gameStart && percentage === "100%"){
             run = true;
+            runAudio?.play();
             bgRight=true;
             bgLeft=false;
         }
@@ -198,6 +194,7 @@ document.body.addEventListener('keydown', (eventData)=> {
         boxElm.style.transform = 'rotateY(180deg)';
         if(alive && gameStart && percentage === "100%"){
             run = true;
+            runAudio?.play();
             bgLeft=true;
             bgRight=false;
         }
@@ -205,6 +202,7 @@ document.body.addEventListener('keydown', (eventData)=> {
     }else if(eventData.code === 'Enter' || eventData.code === 'Space'){
         if(alive && gameStart && percentage === "100%"){
             attack = true;
+            attackAudio?.play();
         }
     }else{
         // console.log(eventData.code);
@@ -259,9 +257,6 @@ function doRun(){
     bgElm.style.backgroundPositionX = `${bgX}px`
 }
 
-setTimeout(()=>{
-    console.log(percentage);
-},5000)
 
 let i = 0;
 function drawIdle(){
@@ -319,7 +314,7 @@ setInterval(()=> {
     if (jump  && gameStart && percentage === "100%"){
         doJump();
     }
-    if (run ){
+    if (run && gameStart && percentage === "100%"){
         doRun();
     }
 }, 5);
@@ -393,8 +388,10 @@ class DivObject{
             if(attack){
                 this.dead = true;
                 this.drawDead();
+                killedAudio?.play();
                 setTimeout(()=>{
                     win+=1;
+                    killedAudio?.play();
                 },0) 
                 ++d;
                 setTimeout(()=>{
@@ -413,6 +410,7 @@ class DivObject{
                 this.speed = (4+Math.random()*10);
                 this.elm.style.left=viewPortWidth+100+'px';
                 if(alive)loss-=1;
+                deadAudio?.play();
                 alive=false;
             }
         }
@@ -519,6 +517,7 @@ class DragonObject{
         
             if(attack){
                 win+=1;
+                killedAudio?.play();
                 // console.log(this.speed);
                 this.dead = true;
                 this.elm.style.transitionProperty='transform';
@@ -542,6 +541,7 @@ class DragonObject{
                 this.speed = (4+Math.random()*10);
                 this.elm.style.left=viewPortWidth+100+'px';
                 if(alive)loss-=1;
+                deadAudio?.play();
                 alive=false;
                 this.yPos = (Math.random()< 0.5 ? 214 : 75 );
                 dragon.xPos=viewPortWidth+100;
@@ -631,6 +631,7 @@ class FireBallObject{
         
         if (hypot < (r1 + this.r2)-40){ 
             if(alive)loss-=1;
+            deadAudio?.play().then(r => console.log());
             alive=false;
             // this.xPos=viewPortWidth+100;
             // fireBallBottom.xPos=viewPortWidth+100;
@@ -714,6 +715,7 @@ class FloatingObject{
         
         if (hypot < (r1 + this.r2)-40){ 
             if(alive)--loss;
+            deadAudio?.play().then(r => console.log());
             alive=false;
             // this.xPos=viewPortWidth+100;
             // this.elm.style.left=this.xPos+'px';
@@ -807,5 +809,4 @@ setInterval(()=>{
     lossOldTxt=lossCurrentText;
 
 },50);
-
 
