@@ -14,12 +14,51 @@
 
 </head>
 <body>
-    <div id="background">
-        <div class="d-none" id="pgb-container">
-            <div id="pgb"></div>
-                
+    <div id="background" >
+        <div class="d-flex justify-content-center">
+            <div class="" id="pgb-container">
+                <div class="" id="pgb"></div>
+            </div>
+        </div>
+
+        <div id="game-over-container" class="d-flex flex-column align-items-center m-2">
+            <div class="" id="gameOverImg"></div>
+            <div id="restart">
+<!--                <button id="playAgain" class="btn btn-light">Play Again</button>-->
+                <img class="buttonImages" src="./img/restart.png" alt="RestartButton" />
+            </div>
         </div>
     </div>
-    
+
+    <div id="instructionsModal" class="modal d-flex align-items-center justify-content-center">
+
+        <div class="modal-content">
+
+            <h3>Instructions</h3>
+
+            <p>How to play:</p>
+            <ul>
+                <li>Survive by attacking and Avoiding the enemy characters</li>
+                <li>Fire Balls, Dinosaur, Dragon are the enemy characters</li>
+                <li>Kill enemies by attacking them, But you can not attack Fire balls </li>
+                <li>If you kill the Dinosaur, the position of the Dragon will be changed</li>
+            </ul>
+
+            <p>Controls:</p>
+            <ul>
+                <li>On-screen buttons</li>
+                <li>Keyboard arrows and WASD: Move left and right, jump, and duck</li>
+                <li>Press Space to function the Kill</li>
+            </ul>
+
+            <!--Play button-->
+            <div id="startButton" class="d-flex justify-content-center">
+                <img class="buttonImages" src="./img/play.png" alt="PlayButton" />
+            </div>
+
+        </div>
+    </div>
+
+
 </body>
 </html>

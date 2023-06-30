@@ -1,11 +1,10 @@
 
 const pgb = $("#pgb");
 
-
 if (typeof window.innerWidth == 'undefined' || typeof window.innerWidth == 'null') {
     viewPortWidth=1300;
 }else{
-    viewPortWidth = window.innerWidth,
+    viewPortWidth = window.innerWidth;
     viewPortHeight = window.innerHeight
 }
 
@@ -26,8 +25,7 @@ for(let i = 0; i <= 9; i++){
     image.onload = function(){
         ++load;
         percentage=(load/70)*100+"%";
-        // console.log(percentage);
-        // pgb.css('width', percentage);
+        pgb.css('width', percentage);
         
     }
 }
@@ -41,8 +39,7 @@ for(let i = 0; i <= 9; i++){
     image.onload = function(){
         ++load;
         percentage=(load/70)*100+"%";
-        // console.log(percentage);
-        // pgb.css('width', percentage);
+        pgb.css('width', percentage);
 
     }
 }
@@ -55,8 +52,7 @@ for(let i = 0; i <= 9; i++){
     image.onload = function(){
         ++load;
         percentage=(load/70)*100+"%";
-        // console.log(percentage);
-        // pgb.css('width', percentage);
+        pgb.css('width', percentage);
 
     }
 }
@@ -68,8 +64,7 @@ for(let i = 0; i <= 9; i++){
     image.onload = function(){
         ++load;
         percentage=(load/70)*100+"%";
-        // console.log(percentage);
-        // pgb.css('width', percentage);
+        pgb.css('width', percentage);
 
     }
 }
@@ -81,8 +76,7 @@ for(let i = 0; i <= 9; i++){
     image.onload = function(){
         ++load;
         percentage=(load/70)*100+"%";
-        // console.log(percentage);
-        // pgb.css('width', percentage);
+        pgb.css('width', percentage);
 
     }
 }
@@ -94,8 +88,7 @@ for(let i = 0; i <= 9; i++){
     image.onload = function(){
         ++load;
         percentage=(load/70)*100+"%";
-        // console.log(percentage);
-        // pgb.css('width', percentage);
+        pgb.css('width', percentage);
     }
 }
 
@@ -106,21 +99,76 @@ for(let i = 1; i <= 10; i++){
     image.onload = function(){
         ++load;
         percentage=(load/70)*100+"%";
-        // console.log(percentage);
-        // pgb.css('width', percentage);
+        pgb.css('width', percentage);
     }
 }
 
 
-let loss=0;
-let win=0;
+/*Instructions*/
 
+let btnStart = $("#startButton");
+let instElm = $("#instructionsModal");
+let gameStart = false;
+
+
+btnStart.on('click', (evt) => {
+    instElm.remove();
+    gameStart=true;
+    dragon = new DragonObject(8,(Math.random()< 0.5 ? 214 : 75 ));
+    fireBallBottom = new FireBallObject((4+Math.random()*12),110);
+});
+
+
+btnStart.on('mouseenter',(evt) => $(evt.currentTarget).css('opacity', '0.9'))
+btnStart.on('mouseleave',(evt) => $(evt.currentTarget).css('opacity', '1'))
+btnStart.on('mousedown',(evt) => $(evt.currentTarget).css('opacity', '0.7'))
+btnStart.on('mouseup', (evt) => $(evt.currentTarget).css('opacity', '1'));
+
+
+
+let loss=3;
+let win=0;
 
 const bgElm = document.getElementById('background');
 
 const boxElm = document.createElement('div');
 boxElm.classList.add('box');
 bgElm.append(boxElm);
+
+
+const gameOverContainer = $('#game-over-container');
+let btnRestart = $('#restart');
+
+btnRestart.on('mouseenter',(evt) => $(evt.currentTarget).css('opacity', '0.8'))
+btnRestart.on('mouseleave',(evt) => $(evt.currentTarget).css('opacity', '1'))
+btnRestart.on('mousedown',(evt) => $(evt.currentTarget).css('opacity', '0.6'))
+btnRestart.on('mouseup', (evt) => $(evt.currentTarget).css('opacity', '1'));
+
+btnRestart.on('click', ()=>{
+    location.reload();
+});
+
+const gameOverCount = 0;
+let gameOver=false;
+
+
+setInterval(() => {
+    if(loss===gameOverCount){
+        gameOverContainer.css('visibility', 'visible');
+        gameOver=true;
+        boxElm.remove();
+        fireBallBottom.elm.remove();
+        dragon.elm.remove();
+        divObject.elm.remove();
+    }
+
+    if(percentage === "100%"){
+        $("#pgb-container").remove();
+    }
+
+}, 50);
+
+
 
 document.body.addEventListener('click', ()=> document.body.requestFullscreen());
 
@@ -135,12 +183,12 @@ let bgLeft=false;
 let bgRight=false;
 document.body.addEventListener('keydown', (eventData)=> {
     if (eventData.code === 'ArrowUp' || eventData.code === 'KeyW'){
-        if(alive){
+        if(alive && gameStart && percentage === "100%"){
             jump = true;
         }
     }else if (eventData.code === 'KeyD' || eventData.code === 'ArrowRight'){
         boxElm.style.transform = 'rotateY(0deg)'
-        if(alive){
+        if(alive && gameStart && percentage === "100%"){
             run = true;
             bgRight=true;
             bgLeft=false;
@@ -148,14 +196,14 @@ document.body.addEventListener('keydown', (eventData)=> {
         dx = 2;
     }else if (eventData.code === 'KeyA' || eventData.code === 'ArrowLeft'){
         boxElm.style.transform = 'rotateY(180deg)';
-        if(alive){
+        if(alive && gameStart && percentage === "100%"){
             run = true;
             bgLeft=true;
             bgRight=false;
         }
         dx = -2;
     }else if(eventData.code === 'Enter' || eventData.code === 'Space'){
-        if(alive){
+        if(alive && gameStart && percentage === "100%"){
             attack = true;
         }
     }else{
@@ -211,6 +259,9 @@ function doRun(){
     bgElm.style.backgroundPositionX = `${bgX}px`
 }
 
+setTimeout(()=>{
+    console.log(percentage);
+},5000)
 
 let i = 0;
 function drawIdle(){
@@ -264,10 +315,11 @@ function drawAttack(){
 }
 
 setInterval(()=> {
-    if (jump){
+    // if(gameOver && percentage<99 && gameStart)return;
+    if (jump  && gameStart && percentage === "100%"){
         doJump();
     }
-    if (run){
+    if (run ){
         doRun();
     }
 }, 5);
@@ -275,7 +327,8 @@ setInterval(()=> {
 
 let notStarted=true;
 setInterval(()=> {
-    if (!jump && !run && alive && !attack){
+    // if(!gameOver && percentage<99)return;
+    if (!jump && !run && alive && !attack && gameStart && percentage === "100%"){
         drawIdle();
         notStarted=true;
     }else if (jump){
@@ -359,7 +412,7 @@ class DivObject{
                 fireBallBottom.xPos=viewPortWidth+100;
                 this.speed = (4+Math.random()*10);
                 this.elm.style.left=viewPortWidth+100+'px';
-                if(alive)loss+=1;
+                if(alive)loss-=1;
                 alive=false;
             }
         }
@@ -390,8 +443,9 @@ class DivObject{
 }
 
 let divObject=new DivObject(1+Math.random()*8);
-setInterval(()=>{ 
-    if(divObject!=null && !divObject.dead){
+setInterval(()=>{
+    // if(gameOver && percentage<99)return;
+    if(divObject!=null && !divObject.dead  && gameStart && percentage === "100%"){
         divObject.kill();
     }else if(divObject==null){
         // console.log(innerWidth);
@@ -400,14 +454,16 @@ setInterval(()=>{
 },50);
 
 setInterval(()=>{
-    if(!divObject.dead){
+    // if(gameOver && percentage<99)return;
+    if(!divObject.dead  && gameStart && percentage === "100%"){
         // console.log("drawing kill...")
         divObject.drawKill();
     }
 },100)
 
 setInterval(()=>{
-    if(divObject.dead){
+    // if(gameOver && percentage<99)return;
+    if(divObject.dead  && gameStart && percentage === "100%"){
         divObject.drawDead();
     }
 },500)
@@ -485,7 +541,7 @@ class DragonObject{
             }else if(!this.dead){
                 this.speed = (4+Math.random()*10);
                 this.elm.style.left=viewPortWidth+100+'px';
-                if(alive)loss+=1;
+                if(alive)loss-=1;
                 alive=false;
                 this.yPos = (Math.random()< 0.5 ? 214 : 75 );
                 dragon.xPos=viewPortWidth+100;
@@ -497,9 +553,10 @@ class DragonObject{
 }
 
 
-let dragon = new DragonObject(8,(Math.random()< 0.5 ? 214 : 75 ));
+let dragon =null;
 setInterval(()=>{
-    if(dragon!=null && alive && !dragon.dead){
+    // if(gameOver && percentage<99)return;
+    if(dragon!=null && alive && !dragon.dead  && gameStart && percentage === "100%"){
         dragon.kill();
     }
 },50);
@@ -573,7 +630,7 @@ class FireBallObject{
         const hypot = Math.hypot(xDiff, yDiff);
         
         if (hypot < (r1 + this.r2)-40){ 
-            if(alive)loss+=1;
+            if(alive)loss-=1;
             alive=false;
             // this.xPos=viewPortWidth+100;
             // fireBallBottom.xPos=viewPortWidth+100;
@@ -590,15 +647,15 @@ class FireBallObject{
 }
 
 
-let fireBallBottom = new FireBallObject((4+Math.random()*12),110);
-setInterval(()=>{ 
-    if(fireBallBottom!=null && alive ){
+let fireBallBottom = null;
+setInterval(()=>{
+    // if(gameOver && percentage<99)return;
+    if(fireBallBottom!=null && alive  && gameStart && percentage === "100%"){
         fireBallBottom.kill();
     }else{
         // fireBallBottom.xPos=viewPortWidth+100;
     }
 },50);
-
 
 
 
@@ -656,7 +713,7 @@ class FloatingObject{
         const hypot = Math.hypot(xDiff, yDiff);
         
         if (hypot < (r1 + this.r2)-40){ 
-            if(alive)++loss;
+            if(alive)--loss;
             alive=false;
             // this.xPos=viewPortWidth+100;
             // this.elm.style.left=this.xPos+'px';
@@ -671,7 +728,8 @@ let floatObj = new FloatingObject();
 
 setInterval(()=>{ 
     // console.log(dinoDeadCount%2==1)
-    if(floatObj!=null && d%2==1 && alive){
+    // if(gameOver && percentage<99)return;
+    if(floatObj!=null && d%2==1 && alive  && gameStart && percentage === "100%"){
         // console.log("from 1");
         floatObj.floating=true;
         floatObj.kill();
@@ -731,7 +789,7 @@ let winOldTxt=lblWin.innerText;
 let lossOldTxt=lblLoss.innerText;
 setInterval(()=>{
     const winCurrentTxt=lblWin.innerText;
-    lblWin.innerText=`Win = ${win}`;
+    lblWin.innerText=`Score = ${win}`;
     if(winOldTxt!=winCurrentTxt){
         setTimeout(()=>lblWin.classList.add('animate__shakeX'),0) ;
         setTimeout(()=>lblWin.classList.remove('animate__shakeX'),500) ;
@@ -740,7 +798,7 @@ setInterval(()=>{
     winOldTxt=winCurrentTxt;
     
     const lossCurrentText=lblLoss.innerText; 
-    lblLoss.innerText=`Loss = ${loss}`;
+    lblLoss.innerText=`Life = ${loss}`;
     if(lossOldTxt!=lossCurrentText){
         setTimeout(()=>lblLoss.classList.add('animate__shakeX'),0) ;
         setTimeout(()=>lblLoss.classList.remove('animate__shakeX'),500) ;
@@ -749,3 +807,5 @@ setInterval(()=>{
     lossOldTxt=lossCurrentText;
 
 },50);
+
+

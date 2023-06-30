@@ -98,13 +98,73 @@ body {
     width: 80vw;
     height: 20px;
     background-color: lightgrey;
-    margin: 10px 0;
+    /*margin: 10px 0;*/
     border-radius: 10px;
 }
 
 #pgb {
-    width: 0%;
+    width: 5%;
     height: 100%;
     background-color: dodgerblue;
     overflow: hidden;
 }
+
+#game-over-container {
+    position: relative;
+    top: 10%;
+    visibility: hidden;
+    z-index: 99999;
+}
+
+#gameOverImg {
+    /*background-image: url('../img/game-over-final.png');*/
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 700px;
+    height: 400px;
+    background-color: rgba(129, 123, 123, 0.56);
+    background-image: url('../img/game_over.png');
+    z-index: 99999;
+}
+
+#restart {
+    /*font-size: 1.5rem;*/
+    height: fit-content;
+    font-weight: bold;
+}
+
+.modal {
+    /*visibility: hidden;*/
+    /*display: flex;*/
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    width: 60%;
+    height:fit-content;
+    overflow: hidden;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+.modal-content input{
+    background-color: rgb(244, 225, 167);
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #0a0909;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+.modal-content label{
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+}
+
