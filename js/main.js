@@ -1,11 +1,11 @@
-const pgb = $('#pgb');
-
 if (typeof window.innerWidth == 'undefined' || typeof window.innerWidth == 'null') {
+
     viewPortWidth=1300;
 }else{
     viewPortWidth = window.innerWidth;
     viewPortHeight = window.innerHeight
 }
+const pgb = $('#pgb');
 
 let imgArray = [];
 let url;
