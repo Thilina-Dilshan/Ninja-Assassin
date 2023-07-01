@@ -69,7 +69,7 @@ for (let n = 0; n < imgFiles.length; n++) {
 }
 
 /*Instructions*/
-let btnStart = $("#startButton");
+let btnStart = $("#startButton").find('img');
 let instElm = $("#instructionsModal");
 let gameStart = false;
 
@@ -85,7 +85,7 @@ btnStart.on('click', (evt) => {
 });
 
 
-btnStart.on('mouseenter',(evt) => $(evt.currentTarget).css('opacity', '0.9'))
+btnStart.on('mouseenter', (evt) => $(evt.currentTarget).css('opacity', '0.9'));
 btnStart.on('mouseleave',(evt) => $(evt.currentTarget).css('opacity', '1'))
 btnStart.on('mousedown',(evt) => $(evt.currentTarget).css('opacity', '0.7'))
 btnStart.on('mouseup', (evt) => $(evt.currentTarget).css('opacity', '1'));
@@ -102,12 +102,14 @@ bgElm.append(boxElm);
 
 
 const gameOverContainer = $('#game-over-container');
-let btnRestart = $('#restart');
+let btnRestart = $('#restart').find('img');
 
 btnRestart.on('mouseenter', (evt) => $(evt.currentTarget).css('opacity', '0.8'));
 btnRestart.on('mouseleave', (evt) => $(evt.currentTarget).css('opacity', '1'));
 btnRestart.on('mousedown', (evt) => $(evt.currentTarget).css('opacity', '0.6'));
 btnRestart.on('mouseup', (evt) => $(evt.currentTarget).css('opacity', '1'));
+
+
 
 $(btnRestart).on('click', ()=>{
     location.reload();
@@ -117,6 +119,7 @@ const gameOverCount = 0;
 let gameOver=false;
 
 
+let fullScreen =
 setInterval(() => {
     if(loss===gameOverCount){
         gameOverContainer.css('visibility', 'visible');
@@ -131,6 +134,12 @@ setInterval(() => {
         $("#pgb-container").remove();
     }
 
+    if(window.innerWidth == screen.width && window.innerHeight == screen.height ){
+        $("#not-full-screen").css('visibility', 'hidden');
+    }else {
+        if(!gameStart)return;
+        $("#not-full-screen").css('visibility', 'visible');
+    }
 }, 50);
 
 let audFiles = ["./audio/jump.mp3", "./audio/sword.wav", "./audio/enemy_killed.wav", "./audio/character_dead.mp3",
@@ -241,8 +250,8 @@ function doRun(){
     let x = boxElm.offsetLeft + dx;
     
     let bgCSS = getComputedStyle(bgElm);
-    if ((x + boxElm.offsetWidth)> innerWidth-130) {
-        x = innerWidth - boxElm.offsetWidth-130;
+    if ((x + boxElm.offsetWidth)> innerWidth-10) {
+        x = innerWidth - boxElm.offsetWidth-10;
         if(bgRight){
             bgX -= 2;
         }
@@ -354,7 +363,7 @@ class DivObject{
     width = 110;
     height = 110;
     speed;
-    xPos=viewPortWidth+100;
+    xPos=viewPortWidth+200;
     yPos=70;
     r2;
     elm;
@@ -377,7 +386,7 @@ class DivObject{
         if(alive && this.xPos > -100 && !this.dead){
             this.elm.style.left = `${this.xPos}px`;
         }else{
-            this.xPos=viewPortWidth+100;
+            this.xPos=viewPortWidth+200;
         }
         
         const r1 = (Math.hypot(boxElm.offsetHeight,boxElm.offsetWidth)-55)/2;
@@ -397,8 +406,8 @@ class DivObject{
                 ++d;
                 setTimeout(()=>{
                     this.speed = (5+Math.random()*12);
-                    this.elm.style.left=viewPortWidth+100+'px'
-                    this.xPos=viewPortWidth+100;
+                    this.elm.style.left=viewPortWidth+150+'px'
+                    this.xPos=viewPortWidth+150;
                     if(dragon.yPos === 214){
                         dragon.yPos=75
                     }else{
@@ -407,9 +416,9 @@ class DivObject{
                 },1000);
                 fireBallBottom.kill();
             }else if(!this.dead){
-                fireBallBottom.xPos=viewPortWidth+100;
+                fireBallBottom.xPos=viewPortWidth+150;
                 this.speed = (4+Math.random()*10);
-                this.elm.style.left=viewPortWidth+100+'px';
+                this.elm.style.left=viewPortWidth+150+'px';
                 if(alive)loss-=1;
                 deadAudio?.play();
                 alive=false;
@@ -471,7 +480,7 @@ class DragonObject{
     width = 200;
     height = 200;
     speed;
-    xPos=viewPortWidth+100;
+    xPos=viewPortWidth+150;
     yPos;
     r2;
     elm;
@@ -500,7 +509,7 @@ class DragonObject{
             this.elm.style.left = `${this.xPos}px`;
             
         }else{
-            this.xPos=viewPortWidth+100;
+            this.xPos=viewPortWidth+150;
         }
         
         const r1 = (Math.hypot(boxElm.offsetHeight,boxElm.offsetWidth)-55)/2;
@@ -520,7 +529,7 @@ class DragonObject{
                 this.elm.style.transform='scale(0)';    //*
                 setTimeout(()=>{
                     this.speed = (4+Math.random()*10);
-                    this.xPos=viewPortWidth+100;
+                    this.xPos=viewPortWidth+150;
                     this.elm.style.left=this.xPos+'px'
                     this.elm.style.transform='scale(1)'
                     this.elm.style.transform= 'rotateY(180deg)';
@@ -534,13 +543,13 @@ class DragonObject{
                 
             }else if(!this.dead){
                 this.speed = (4+Math.random()*10);
-                this.elm.style.left=viewPortWidth+100+'px';
+                this.elm.style.left=viewPortWidth+150+'px';
                 if(alive)loss-=1;
                 deadAudio?.play();
                 alive=false;
                 this.yPos = (Math.random()< 0.5 ? 214 : 75 );
-                dragon.xPos=viewPortWidth+100;
-                fireBallBottom.xPos=viewPortWidth+100;
+                dragon.xPos=viewPortWidth+150;
+                fireBallBottom.xPos=viewPortWidth+150;
 
             }
         }
@@ -563,7 +572,7 @@ class FireBallObject{
     width = 90;
     height = 60;
     speed;
-    xPos=viewPortWidth+100;
+    xPos=viewPortWidth+150;
     yPos;
     r2;
     elm;
@@ -588,10 +597,10 @@ class FireBallObject{
         this.elm.style.bottom = this.yPos+'px';
         
         if(divObject.dead){
-            this.xPos=viewPortWidth+100;
+            this.xPos=viewPortWidth+150;
         }
 
-        if(this.xPos>-100 && this.xPos<1110){
+        if(this.xPos>-100 && this.xPos<1280){
             this.xPos -= divObject.speed*1.5;
         }else{
             this.xPos -= divObject.speed;
@@ -614,10 +623,10 @@ class FireBallObject{
             if(alive)loss-=1;
             deadAudio?.play().then(r => console.log());
             alive=false;
-            this.xPos=viewPortWidth+100;
+            this.xPos=viewPortWidth+150;
             this.elm.style.left=this.xPos+'px';
             setTimeout(()=>this.speed = 4+Math.random()*12,0)
-            dragon.xPos=viewPortWidth+100;
+            dragon.xPos=viewPortWidth+150;
 
         }
     } 
@@ -663,7 +672,7 @@ class FloatingObject{
     kill(){
         this.yPos += this.speed;
         this.elm.style.left = this.xPos+'px';
-        if(this.yPos >= innerHeight-200){
+        if(this.yPos >= innerHeight-130){
             this.speed=0;
             this.floating=false;
             // console.log("Working")
@@ -726,7 +735,7 @@ lblWin.style.fontWeight='bold';
 lblWin.style.backgroundColor="green";
 lblWin.style.borderRadius='6px';
 lblWin.style.padding='10px';
-lblWin.style.top='10px';
+lblWin.style.top='50px';
 lblWin.style.left=lblPosition+'px'
 bgElm.append(lblWin);
 lblWin.style.visibility = 'hidden';
@@ -740,7 +749,7 @@ lblLoss.style.fontWeight='bold';
 lblLoss.style.backgroundColor="red";
 lblLoss.style.borderRadius='6px';
 lblLoss.style.padding='10px';
-lblLoss.style.top='10px';
+lblLoss.style.top='50px';
 lblLoss.style.right=lblPosition+'px';
 bgElm.append(lblLoss);
 lblLoss.style.visibility = 'hidden';
