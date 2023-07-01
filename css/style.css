@@ -14,7 +14,7 @@ body {
 #background {
     width: 90vw ;
     height: 90vh;
-    background-image: url('../img/background-final-2.jpg');
+    background-image: url('/img/background-final-2.jpg');
     /* background-repeat:  no-repeat; */
     /* background-size: contain; */
     background-size: cover;
@@ -38,7 +38,7 @@ body {
     width: 101px;
     height: 185px;
     /* background-color: blue; */
-    /* background-image: url('../img/Idle\ \(1\).png'); */
+    /* background-image: url('../img/Idle\ \(1\).png');*/
     /* background-image: url('../img/Idle__000.png'); */
     /* background-size: contain; */
     background-size: cover;
@@ -56,7 +56,7 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     bottom: 70px;
-    background-image: url('/img/Walk\ \(1\).png');
+    /*background-image: url('/img/Walk\ \(1\).png');*/
     transform: rotateY(180deg);
 }
 
@@ -66,7 +66,7 @@ body {
     background-size:cover;
     background-repeat: no-repeat;
     bottom: 80px;    
-    background-image: url('/img/Objects-1/Bush\ \(1\).png');
+    /*background-image: url('/img/Objects-1/Bush\ \(1\).png');*/
 }
 
 .fireBall {
@@ -74,7 +74,7 @@ body {
     background-size: cover;
     background-size: contain;
     /* background-repeat: no-repeat; */
-    background-image: url('/img/fireball.gif');
+    background-image: url('../img/fireball.gif');
     transform: rotateY(180deg);
     border-radius: 50%;
 }
@@ -98,7 +98,7 @@ body {
     width: 80vw;
     height: 20px;
     background-color: lightgrey;
-    /*margin: 10px 0;*/
+    margin: 0 auto;
     border-radius: 10px;
 }
 

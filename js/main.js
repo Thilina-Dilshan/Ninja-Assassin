@@ -21,40 +21,40 @@ let prg=0;
 let imgFiles = [];
 
 for(let i = 0; i <= 9; i++){
-    imgFiles.push(`img/Jump__00${i}.png`);
+    imgFiles.push(`../img/Jump__00${i}.png`);
 }
 
 for(let i = 1; i <= 12; i++){
-    imgFiles.push(`img/Jump (${i}).png`);
+    imgFiles.push(`../img/Jump (${i}).png`);
 }
 
 
 for(let i = 1; i <= 10; i++){
-    imgFiles.push(`img/Idle (${i}).png`);
+    imgFiles.push(`../img/Idle (${i}).png`);
 }
 
 for(let i = 0; i <= 9; i++){
-    imgFiles.push(`img/Idle__00${i}.png`);
-}
-
-
-for(let i = 0; i <= 9; i++){
-    imgFiles.push(`img/Run__00${i}.png`);
+    imgFiles.push(`../img/Idle__00${i}.png`);
 }
 
 
 for(let i = 0; i <= 9; i++){
-    imgFiles.push(`img/Dead__00${i}.png`);
+    imgFiles.push(`../img/Run__00${i}.png`);
 }
 
 
 for(let i = 0; i <= 9; i++){
-    imgFiles.push(`img/Jump_Attack__00${i}.png`);
+    imgFiles.push(`../img/Dead__00${i}.png`);
+}
+
+
+for(let i = 0; i <= 9; i++){
+    imgFiles.push(`../img/Jump_Attack__00${i}.png`);
 }
 
 
 for(let i = 1; i <= 10; i++){
-    imgFiles.push(`img/Walk (${i}).png`);
+    imgFiles.push(`../img/Walk (${i}).png`);
 }
 
 console.log(imgFiles.length);
@@ -126,7 +126,7 @@ setInterval(() => {
     }
 
     if(percentage === "100%"){
-        $("#pgb-container").remove();
+        // $("#pgb-container").remove();
     }
 
 }, 50);
