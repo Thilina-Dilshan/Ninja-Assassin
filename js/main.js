@@ -80,6 +80,8 @@ btnStart.on('click', (evt) => {
     startAudio?.play();
     dragon = new DragonObject(8,(Math.random()< 0.5 ? 214 : 75 ));
     fireBallBottom = new FireBallObject((4+Math.random()*12),110);
+    lblLoss.style.visibility = 'visible';
+    lblWin.style.visibility = 'visible';
 });
 
 
@@ -102,12 +104,12 @@ bgElm.append(boxElm);
 const gameOverContainer = $('#game-over-container');
 let btnRestart = $('#restart');
 
-btnRestart.on('mouseenter',(evt) => $(evt.currentTarget).css('opacity', '0.8'))
-btnRestart.on('mouseleave',(evt) => $(evt.currentTarget).css('opacity', '1'))
-btnRestart.on('mousedown',(evt) => $(evt.currentTarget).css('opacity', '0.6'))
+btnRestart.on('mouseenter', (evt) => $(evt.currentTarget).css('opacity', '0.8'));
+btnRestart.on('mouseleave', (evt) => $(evt.currentTarget).css('opacity', '1'));
+btnRestart.on('mousedown', (evt) => $(evt.currentTarget).css('opacity', '0.6'));
 btnRestart.on('mouseup', (evt) => $(evt.currentTarget).css('opacity', '1'));
 
-btnRestart.on('click', ()=>{
+$(btnRestart).on('click', ()=>{
     location.reload();
 });
 
@@ -630,8 +632,6 @@ setInterval(()=>{
 },50);
 
 
-
-
 /* Floating object */
 
 class FloatingObject{
@@ -729,6 +729,8 @@ lblWin.style.padding='10px';
 lblWin.style.top='10px';
 lblWin.style.left=lblPosition+'px'
 bgElm.append(lblWin);
+lblWin.style.visibility = 'hidden';
+
 
 const lblLoss = document.createElement('label');
 lblLoss.style.position='absolute';
@@ -741,6 +743,7 @@ lblLoss.style.padding='10px';
 lblLoss.style.top='10px';
 lblLoss.style.right=lblPosition+'px';
 bgElm.append(lblLoss);
+lblLoss.style.visibility = 'hidden';
 
 let winOldTxt=lblWin.innerText;
 let lossOldTxt=lblLoss.innerText;
