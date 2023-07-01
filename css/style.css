@@ -74,7 +74,7 @@ body {
     background-size: cover;
     background-size: contain;
     /* background-repeat: no-repeat; */
-    background-image: url('../img/fireball.gif');
+    background-image: url('img/fireball.gif');
     transform: rotateY(180deg);
     border-radius: 50%;
 }
@@ -88,7 +88,7 @@ body {
 
 .fylDragon {
     background-size: cover;
-    background-image: url('/img/dragon-2.gif');
+    background-image: url('img/dragon-2.gif');
     transform: rotateY(180deg) ;
     border-radius: 50%;
 }
