@@ -261,19 +261,19 @@ function doRun(){
 let i = 0;
 function drawIdle(){
     boxElm.style.width= '101px';
-    boxElm.style.backgroundImage = `url('/img/Idle__00${i++}.png')`;
+    boxElm.style.backgroundImage = `url('../img/Idle__00${i++}.png')`;
     if(i === 9) i = 0;
 }
 
 let k = 0;
 function drawJump(){
-    boxElm.style.backgroundImage = `url('img/Jump__00${k++}.png')`;
+    boxElm.style.backgroundImage = `url('../img/Jump__00${k++}.png')`;
     if(k === 9) k = 0;
 }
 
 let j = 0;
 function drawRun(){
-    boxElm.style.backgroundImage = `url('img/Run__00${j++}.png')`;
+    boxElm.style.backgroundImage = `url('../img/Run__00${j++}.png')`;
     if(j === 9) j = 0;
 }
 
@@ -282,7 +282,7 @@ let l =0;
 function drowDead(){
     boxElm.style.width= '170px';
     if(l<10){
-        boxElm.style.backgroundImage = `url('img/Dead__00${l++}.png')`;
+        boxElm.style.backgroundImage = `url('../img/Dead__00${l++}.png')`;
     }
     if(l === 9) setTimeout(()=>{
         alive=true;
@@ -297,7 +297,7 @@ function drowDead(){
 let m =0;
 function drawAttack(){
     boxElm.style.width= '170px'
-    boxElm.style.backgroundImage = `url('img/Jump_Attack__00${m++}.png')`;
+    boxElm.style.backgroundImage = `url('../img/Jump_Attack__00${m++}.png')`;
     if(m === 9) {
         setTimeout(()=>{
             m = 0;
@@ -423,7 +423,7 @@ class DivObject{
         this.elm.style.backgroundRepeat= 'no-repeat';
         this.elm.style.transform= 'rotateY(180deg)';
         if(this.a === 10) this.a = 1;
-        this.elm.style.backgroundImage = `url('img/Walk (${this.a++}).png')`;
+        this.elm.style.backgroundImage = `url('../img/Walk (${this.a++}).png')`;
     }
 
     b=1;
@@ -436,7 +436,7 @@ class DivObject{
             this.b = 1;
             setTimeout(()=>this.dead=false,1500);
         }
-        this.elm.style.backgroundImage = `url('img/Dead (${this.b++}).png')`;
+        this.elm.style.backgroundImage = `url('../img/Dead (${this.b++}).png')`;
     }
 }
 
