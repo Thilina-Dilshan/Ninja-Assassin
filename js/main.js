@@ -365,7 +365,6 @@ class DivObject{
         this.elm.style.bottom= `${this.yPos}px`;
         this.speed = speed;
         this.elm.style.zIndex = 99;
-        // this.elm.style.backgroundColor = 'black';
         this.r2 = this.height/2;
         document.getElementById('background').append(this.elm);
     }
@@ -442,11 +441,9 @@ class DivObject{
 
 let divObject=new DivObject(1+Math.random()*8);
 setInterval(()=>{
-    // if(gameOver && percentage<99)return;
     if(divObject!=null && !divObject.dead  && gameStart && percentage === "100%"){
         divObject.kill();
     }else if(divObject==null){
-        // console.log(innerWidth);
         divObject = new DivObject().kill();
     }
 },50);
@@ -454,7 +451,6 @@ setInterval(()=>{
 setInterval(()=>{
     // if(gameOver && percentage<99)return;
     if(!divObject.dead  && gameStart && percentage === "100%"){
-        // console.log("drawing kill...")
         divObject.drawKill();
     }
 },100)
@@ -487,8 +483,6 @@ class DragonObject{
         this.elm.style.width = `${this.width}px`;
         this.elm.style.height = `${this.height}px`;
         this.elm.style.bottom= `${this.yPos}px`;
-        // this.alive = true;
-        // this.elm.style.backgroundColor = 'black';
         this.elm.classList.add('fylDragon');
         this.r2 = this.height/2;
         this.elm.style.scale='0.4';
@@ -513,16 +507,15 @@ class DragonObject{
         const hypot = Math.hypot(xDiff, yDiff);
         
         if (hypot < (r1 + this.r2)-60){ 
-            // console.log(hypot < (r1 + this.r2)-45);
-        
+
             if(attack){
                 win+=1;
                 killedAudio?.play();
                 // console.log(this.speed);
                 this.dead = true;
                 this.elm.style.transitionProperty='transform';
-                this.elm.style.transitionDuration='1000ms'; //?
-                this.elm.style.transform='scale(0)';    //?
+                this.elm.style.transitionDuration='1000ms'; //*
+                this.elm.style.transform='scale(0)';    //*
                 setTimeout(()=>{
                     this.speed = (4+Math.random()*10);
                     this.xPos=viewPortWidth+100;
@@ -583,8 +576,6 @@ class FireBallObject{
         this.elm.style.width = `${this.width}px`;
         this.elm.style.height = `${this.height}px`;
         this.elm.style.bottom= `${this.yPos}px`;
-        // this.alive = true;
-        // this.elm.style.backgroundColor = 'black';
         this.elm.classList.add('fireBall');
         this.r2 = this.height/2;
         this.elm.style.scale='0.4';
@@ -592,17 +583,9 @@ class FireBallObject{
     }
     
     kill(){
-        // console.log("Relocating")
-        // this.xPos -= this.speed;
-
-        // if(divObject.dead){
-        //     this.xPos=divObject.xPos;
-            
-        // }
         this.elm.style.bottom = this.yPos+'px';
         
         if(divObject.dead){
-            // this.xPos=divObject.xPos;
             this.xPos=viewPortWidth+100;
         }
 
@@ -616,10 +599,6 @@ class FireBallObject{
             this.elm.style.left = `${this.xPos}px`;
             
         }else{
-            // this.elm.alive = false;
-            // this.elm.remove();
-            // this.elm=null;
-            // this.elm.style.right = 10;
             this.xPos=divObject.xPos;
             this.speed=0;
         }
@@ -633,16 +612,11 @@ class FireBallObject{
             if(alive)loss-=1;
             deadAudio?.play().then(r => console.log());
             alive=false;
-            // this.xPos=viewPortWidth+100;
-            // fireBallBottom.xPos=viewPortWidth+100;
             this.xPos=viewPortWidth+100;
             this.elm.style.left=this.xPos+'px';
             setTimeout(()=>this.speed = 4+Math.random()*12,0)
             dragon.xPos=viewPortWidth+100;
-            // this.elm.style.left=this.xPos+'px';
-            // this.yPos = (70);
-            // console.log('Player dead"s: ', ++playerDeadCount);
-            // console.log(this.yPos);
+
         }
     } 
 }
@@ -650,11 +624,8 @@ class FireBallObject{
 
 let fireBallBottom = null;
 setInterval(()=>{
-    // if(gameOver && percentage<99)return;
     if(fireBallBottom!=null && alive  && gameStart && percentage === "100%"){
         fireBallBottom.kill();
-    }else{
-        // fireBallBottom.xPos=viewPortWidth+100;
     }
 },50);
 
@@ -683,9 +654,6 @@ class FloatingObject{
         this.elm.style.height = `${this.height}px`;
         this.elm.style.top= `${this.yPos}px`;
         this.elm.style.transform= `rotate(90deg)`;
-        // this.elm.style.zIndex=999;
-        // this.alive = true;
-        // this.elm.style.backgroundColor = 'black';
         this.elm.classList.add('fireBall');
         this.r2 = this.height/2;
         this.elm.style.scale='0.4';
@@ -701,11 +669,6 @@ class FloatingObject{
             // console.log("Working")
         }else{
             this.elm.style.top = this.yPos+'px';
-            // this.elm.alive = false;
-            // this.elm.remove();
-            // this.elm=null;
-            // this.elm.style.right = 10;
-            // this.yPos=-100;
         }
         
         const r1 = (Math.hypot(boxElm.offsetHeight,boxElm.offsetWidth)-55)/2;
@@ -717,10 +680,6 @@ class FloatingObject{
             if(alive)--loss;
             deadAudio?.play().then(r => console.log());
             alive=false;
-            // this.xPos=viewPortWidth+100;
-            // this.elm.style.left=this.xPos+'px';
-            // this.yPos = (75+Math.random()*275);
-            // console.log('Player dead"s: ', ++playerDeadCount);
 
         }
     } 
@@ -729,8 +688,6 @@ class FloatingObject{
 let floatObj = new FloatingObject();
 
 setInterval(()=>{ 
-    // console.log(dinoDeadCount%2==1)
-    // if(gameOver && percentage<99)return;
     if(floatObj!=null && d%2==1 && alive  && gameStart && percentage === "100%"){
         // console.log("from 1");
         floatObj.floating=true;
@@ -750,9 +707,7 @@ setInterval(()=>{
         floatObj.kill();
         // floatObj.style.top = yPos+'px';
         d=2;
-        // alert("Okay")
-        // floatObj.kill();
-        // console.log("from 2");    
+
     }
 
 
