@@ -15,8 +15,6 @@ body {
     width: 90vw ;
     height: 90vh;
     background-image: url('../img/background-final-2.jpg');
-    /* background-repeat:  no-repeat; */
-    /* background-size: contain; */
     background-size: cover;
     position: relative;
     overflow: hidden;
@@ -26,7 +24,6 @@ body {
 .background {
     width: 100vw ;
     height: 100vh;
-    position: absolute;
     background-size: cover;
     position: relative;
     overflow: hidden;
@@ -37,10 +34,6 @@ body {
     position: absolute;
     width: 101px;
     height: 185px;
-    /* background-color: blue; */
-    /* background-image: url('../img/Idle\ \(1\).png');*/
-    /* background-image: url('../img/Idle__000.png'); */
-    /* background-size: contain; */
     background-size: cover;
     background-repeat: no-repeat;
     bottom: 70px;
@@ -50,41 +43,23 @@ body {
 
 .object{
     position: absolute;
-    /* background-color: blue; */
     width: 108px;
     height: 130px;
     background-size: cover;
     background-repeat: no-repeat;
     bottom: 70px;
-    /*background-image: url('/img/Walk\ \(1\).png');*/
     transform: rotateY(180deg);
 }
 
-.obj {
-    width: fit-content;
-    height: 150px;
-    background-size:cover;
-    background-repeat: no-repeat;
-    bottom: 80px;    
-    /*background-image: url('/img/Objects-1/Bush\ \(1\).png');*/
-}
 
 .fireBall {
    
-    background-size: cover;
     background-size: contain;
-    /* background-repeat: no-repeat; */
     background-image: url('../img/fireball.gif');
     transform: rotateY(180deg);
     border-radius: 50%;
 }
 
-.egg {
-    /* background-size: cover; */
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-image: url('/img/egg.png');
-}
 
 .fylDragon {
     background-size: cover;
@@ -110,15 +85,14 @@ body {
 }
 
 #game-over-container {
-    position: relative;
-    top: 10%;
-    margin: 0 auto;
     visibility: hidden;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
     z-index: 99999;
 }
 
 #gameOverImg {
-    /*background-image: url('../img/game-over-final.png');*/
     background-size: cover;
     background-repeat: no-repeat;
     width: 700px;
@@ -136,7 +110,6 @@ body {
 
 .modal {
     /*visibility: hidden;*/
-    /*display: flex;*/
     position: absolute;
     left: 50%;
     transform: translateX(-50%);

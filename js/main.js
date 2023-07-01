@@ -126,7 +126,7 @@ setInterval(() => {
     }
 
     if(percentage === "100%"){
-        // $("#pgb-container").remove();
+        $("#pgb-container").remove();
     }
 
 }, 50);
@@ -780,7 +780,7 @@ lblLoss.style.position='absolute';
 lblLoss.classList.add('animate__animated');
 lblLoss.style.fontSize='2rem';
 lblLoss.style.fontWeight='bold';
-lblLoss.style.backgroundColor="darkRed";
+lblLoss.style.backgroundColor="red";
 lblLoss.style.borderRadius='6px';
 lblLoss.style.padding='10px';
 lblLoss.style.top='10px';
