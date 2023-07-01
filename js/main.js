@@ -718,8 +718,6 @@ setInterval(()=>{
         d=2;
 
     }
-
-
 },50);
 
 
@@ -732,7 +730,8 @@ lblWin.style.position='absolute';
 lblWin.classList.add('animate__animated');
 lblWin.style.fontSize='2rem';
 lblWin.style.fontWeight='bold';
-lblWin.style.backgroundColor="green";
+lblWin.style.color="white";
+lblWin.style.backgroundImage="linear-gradient(rgb(18, 80, 18), rgba(15, 21, 14, 0.98))  ";
 lblWin.style.borderRadius='6px';
 lblWin.style.padding='10px';
 lblWin.style.top='50px';
@@ -746,7 +745,8 @@ lblLoss.style.position='absolute';
 lblLoss.classList.add('animate__animated');
 lblLoss.style.fontSize='2rem';
 lblLoss.style.fontWeight='bold';
-lblLoss.style.backgroundColor="red";
+lblLoss.style.color='white';
+lblLoss.style.backgroundImage="linear-gradient(rgb(128, 2, 2), rgba(10, 2, 2, 0.98)";
 lblLoss.style.borderRadius='6px';
 lblLoss.style.padding='10px';
 lblLoss.style.top='50px';
