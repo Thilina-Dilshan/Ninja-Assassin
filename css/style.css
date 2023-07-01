@@ -14,7 +14,7 @@ body {
 #background {
     width: 90vw ;
     height: 90vh;
-    background-image: url('/img/background-final-2.jpg');
+    background-image: url('img/background-final-2.jpg');
     /* background-repeat:  no-repeat; */
     /* background-size: contain; */
     background-size: cover;
