@@ -14,7 +14,7 @@ body {
 #background {
     width: 90vw ;
     height: 90vh;
-    background-image: url('img/background-final-2.jpg');
+    background-image: url('../img/background-final-2.jpg');
     /* background-repeat:  no-repeat; */
     /* background-size: contain; */
     background-size: cover;
@@ -74,7 +74,7 @@ body {
     background-size: cover;
     background-size: contain;
     /* background-repeat: no-repeat; */
-    background-image: url('img/fireball.gif');
+    background-image: url('../img/fireball.gif');
     transform: rotateY(180deg);
     border-radius: 50%;
 }
@@ -88,7 +88,7 @@ body {
 
 .fylDragon {
     background-size: cover;
-    background-image: url('img/dragon-2.gif');
+    background-image: url('../img/dragon-2.gif');
     transform: rotateY(180deg) ;
     border-radius: 50%;
 }
@@ -112,6 +112,7 @@ body {
 #game-over-container {
     position: relative;
     top: 10%;
+    margin: 0 auto;
     visibility: hidden;
     z-index: 99999;
 }
