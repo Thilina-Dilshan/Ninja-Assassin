@@ -184,6 +184,7 @@ body {
 
 #not-full-screen > h3 {
     text-align: center;
+    z-index: 9999999;
 }
 
 
@@ -195,8 +196,7 @@ body {
     #not-support {
         visibility: visible;
         background-color: rgba(175, 175, 170, 0.51);
-        color: white;
-        background-image: linear-gradient(rgb(128, 2, 2), rgba(10, 2, 2, 0.98));
+        z-index: 9999999;
     }
 }
 
