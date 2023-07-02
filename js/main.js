@@ -1,9 +1,9 @@
-if (typeof window.innerWidth == 'undefined' || typeof window.innerWidth == 'null') {
-
-    viewPortWidth=1300;
+if (typeof window.screen.availWidth == 'undefined' || typeof window.screen.availWidth === 'null') {
+    viewPortWidth=1400;
+    viewPortHeight=800;
 }else{
-    viewPortWidth = window.innerWidth;
-    viewPortHeight = window.innerHeight
+    viewPortWidth = window.screen.availWidth;
+    viewPortHeight = window.screen.availHeight;
 }
 const pgb = $('#pgb');
 
