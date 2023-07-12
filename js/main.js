@@ -457,13 +457,14 @@ lblLoss.style.visibility = 'hidden';
 
 /* ------------------------- Events -------------------------- */
 btnStart.on('click', (evt) => {
-    instElm.remove();
-    gameStart=true;
-    startAudio?.play();
-    dragon = new DragonObject(8,(Math.random()< 0.5 ? 214 : 75 ));
-    fireBallBottom = new FireBallObject((4+Math.random()*12),110);
-    lblLoss.style.visibility = 'visible';
-    lblWin.style.visibility = 'visible';
+    if (percentage !== "100%") return;
+        instElm.remove();
+        gameStart = true;
+        startAudio?.play();
+        dragon = new DragonObject(8, (Math.random() < 0.5 ? 214 : 75));
+        fireBallBottom = new FireBallObject((4 + Math.random() * 12), 110);
+        lblLoss.style.visibility = 'visible';
+        lblWin.style.visibility = 'visible';
 });
 
 btnStart.on('mouseenter', (evt) => $(evt.currentTarget).css('opacity', '0.9'));
@@ -534,6 +535,7 @@ setInterval(() => {
 
     if (percentage === "100%") {
         $("#pgb-container").remove();
+        $("#startButton").addClass('opacity-100');
     }
 
     if (window.innerWidth == screen.width && window.innerHeight == screen.height) {

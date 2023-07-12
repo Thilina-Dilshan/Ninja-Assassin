@@ -112,6 +112,10 @@ body {
     z-index: 999999;
 }
 
+#startButton{
+    transition: opacity 1s;
+}
+
 #instructionsModal {
     /*visibility: hidden;*/
     display: flex;
