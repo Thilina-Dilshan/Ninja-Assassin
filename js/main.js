@@ -331,7 +331,7 @@ let gameOver=false;
 const gameOverContainer = $('#game-over-container');
 let btnRestart = $('#restart').find('img');
 
-/* Movements and characters*/
+/* Movements and Characters*/
 let jump = false;
 let run = false;
 let alive = true;
@@ -657,11 +657,12 @@ function doJump() {
     boxElm.style.width = '150px';
     let y = Math.cos(angle * (Math.PI / 180));
     y *= 3;
-    boxElm.style.top = (boxElm.offsetTop - y) + "px";
+    boxElm.style.top = (boxElm.offsetTop - y) + 'px';
     angle++;
     if (angle > 180) {
         jump = false;
         angle = 0;
+        boxElm.style.top = (boxElm.offsetTop - 1) + 'px';
     }
 }
 
